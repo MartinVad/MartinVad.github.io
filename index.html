@@ -1,102 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Name | Bioinformatician & Data Scientist</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-:root { --accent:#0d6efd; --bg:#f9fafb; --text:#1f2937; --sub:#4b5563;}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);line-height:1.7;}
-header{background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100;}
-nav{max-width:960px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1rem;}
-nav a{margin-left:1rem;color:var(--text);text-decoration:none;font-weight:500;}
-nav a:hover{color:var(--accent);}
-.hero{max-width:960px;margin:4rem auto;text-align:center;}
-.hero h1{font-size:2.5rem;margin-bottom:1rem;}
-.hero p{font-size:1.2rem;color:var(--sub);}
-.section{max-width:960px;margin:4rem auto;padding:0 1rem;}
-.section h2{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
-.skills ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem;list-style:none;}
-.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;}
-.card{background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.04);padding:1rem;}
-footer{background:#fff;padding:2rem 0;text-align:center;color:var(--sub);font-size:.9rem;margin-top:4rem;}
-button.cv{background:var(--accent);color:#fff;border:none;padding:.75rem 1.5rem;border-radius:8px;font-weight:600;cursor:pointer;}
-button.cv:hover{opacity:.9;}
-@media(max-width:600px){.hero h1{font-size:2rem;}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Martin Møller | Bioinformatician & Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
 </head>
-<body>
-<header>
-  <nav>
-    <div class="logo"><strong>Your&nbsp;Name</strong></div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold"><a href="#top">Martin Møller</a></h1>
+      <nav class="space-x-6 hidden sm:block">
+        <a href="#about" class="hover:text-blue-600">About</a>
+        <a href="#cv" class="hover:text-blue-600">CV</a>
+        <a href="#projects" class="hover:text-blue-600">Projects</a>
+        <a href="#skills" class="hover:text-blue-600">Skills</a>
+        <a href="#contact" class="hover:text-blue-600">Contact</a>
+      </nav>
     </div>
-  </nav>
-</header>
+  </header>
 
-<section class="hero">
-  <h1>Hi, I'm Your Name</h1>
-  <p>Bioinformatician &amp; Data Scientist at a public hospital, focusing on clinical data.</p>
-  <a href="CV.pdf" download><button class="cv">Download CV</button></a>
-</section>
+  <!-- Hero -->
+  <section id="top" class="max-w-5xl mx-auto px-4 py-20 text-center">
+    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Martin Møller</h2>
+    <p class="text-lg sm:text-xl mb-6">Bioinformatician & Data Scientist focused on clinical genomics and healthcare analytics.</p>
+    <a href="#projects" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full shadow hover:bg-blue-700 transition">View My Work</a>
+  </section>
 
-<section id="about" class="section about">
-  <h2>About Me</h2>
-  <p>I work in the intersection of healthcare and data, building pipelines that transform raw clinical data into actionable insights. I'm passionate about improving patient outcomes through robust bioinformatics and reproducible research workflows.</p>
-</section>
-
-<section id="skills" class="section skills">
-  <h2>Skills</h2>
-  <ul>
-    <li>Python &amp; R</li>
-    <li>Next‑generation sequencing analysis</li>
-    <li>Machine learning (scikit‑learn, PyTorch)</li>
-    <li>Data visualisation (ggplot2, matplotlib, seaborn)</li>
-    <li>SQL &amp; data warehousing</li>
-    <li>Workflow management (Snakemake, Nextflow)</li>
-    <li>Git &amp; GitHub</li>
-    <li>Linux &amp; HPC</li>
-  </ul>
-</section>
-
-<section id="projects" class="section">
-  <h2>Selected Projects</h2>
-  <div class="project-grid">
-    <div class="card">
-      <h3>Clinical Genomics Pipeline</h3>
-      <p>A reproducible pipeline (Snakemake) for variant calling and annotation, now used in routine diagnostics.</p>
-      <a href="#" target="_blank">Repository</a>
+  <!-- About -->
+  <section id="about" class="bg-white py-16">
+    <div class="max-w-3xl mx-auto px-4">
+      <h3 class="text-2xl font-semibold mb-4">About</h3>
+      <p class="leading-relaxed">I am a Bioinformatician and Data Scientist working at a public hospital in Denmark, delivering data‑driven insights to clinicians. My work spans building reproducible NGS pipelines (Nextflow/Snakemake), bridging electronic health‑record data with statistical and machine‑learning models, and translating results into actionable healthcare improvements. Passionate about clean code, open science, and continuous learning.</p>
     </div>
-    <div class="card">
-      <h3>ICU Data Dashboard</h3>
-      <p>Interactive dashboard (Python, Plotly Dash) visualising real‑time ICU metrics to assist clinicians.</p>
-      <a href="#" target="_blank">Repository</a>
-    </div>
-    <div class="card">
-      <h3>Antimicrobial Resistance Predictor</h3>
-      <p>Machine‑learning model predicting antibiotic resistance from genomic data.</p>
-      <a href="#" target="_blank">Repository</a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact" class="section">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-  <p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
-  <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
-</section>
+  <!-- CV Link -->
+  <section id="cv" class="py-16">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h3 class="text-2xl font-semibold mb-6">Curriculum Vitae</h3>
+      <p class="mb-6">Download my full CV for details on publications, experience, and education.</p>
+      <a href="CV.pdf" class="bg-gray-900 text-white px-6 py-3 rounded-full shadow hover:bg-gray-700 transition" target="_blank">Download PDF</a>
+    </div>
+  </section>
 
-<footer>
-  &copy; 2025 Your Name. Built with ❤ and hosted on GitHub Pages.
-</footer>
+  <!-- Projects -->
+  <section id="projects" class="bg-white py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <h3 class="text-2xl font-semibold mb-8 text-center">Selected Projects</h3>
+      <div class="grid gap-8 md:grid-cols-2">
+        <!-- Project 1 -->
+        <div class="bg-gray-100 p-6 rounded-2xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Clinical Genomics Pipeline</h4>
+          <p class="mb-4 text-sm">A scalable Nextflow pipeline for whole‑exome sequencing analysis, integrated with hospital LIMS and delivering variant reports to clinicians in < 24 hours.</p>
+          <a href="https://github.com/yourusername/clinical-genomics-pipeline" class="text-blue-600 hover:underline" target="_blank">GitHub Repo</a>
+        </div>
+        <!-- Project 2 -->
+        <div class="bg-gray-100 p-6 rounded-2xl shadow">
+          <h4 class="text-xl font-semibold mb-2">EHR‑based Risk Prediction</h4>
+          <p class="mb-4 text-sm">Gradient‑boosted models predicting 30‑day readmission risk from structured and unstructured EHR data, deployed as an internal dashboard for clinicians.</p>
+          <a href="https://github.com/yourusername/ehr-risk-prediction" class="text-blue-600 hover:underline" target="_blank">GitHub Repo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <h3 class="text-2xl font-semibold mb-8 text-center">Skills & Tools</h3>
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 text-sm">
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Python / R</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Nextflow & Snakemake</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">SQL & PostgreSQL</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Machine Learning (scikit‑learn, XGBoost)</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">NGS Data Analysis</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Data Visualization (Plotly, ggplot2)</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Docker & Kubernetes</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Git & CI/CD (GitHub Actions)</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">HL7 FHIR & EHR Data</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-white py-16">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h3 class="text-2xl font-semibold mb-4">Get in Touch</h3>
+      <p class="mb-6">Feel free to reach out for collaborations or just a friendly chat.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="mailto:youremail@example.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Email Me</a>
+        <a href="https://www.linkedin.com/in/mvmoeller/" class="bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-gray-500 text-sm">
+    © 2025 Martin Møller. All rights reserved.
+  </footer>
 </body>
 </html>
