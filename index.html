@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name | Bioinformatician & Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --accent:#0d6efd; --bg:#f9fafb; --text:#1f2937; --sub:#4b5563;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);line-height:1.7;}
+header{background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100;}
+nav{max-width:960px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1rem;}
+nav a{margin-left:1rem;color:var(--text);text-decoration:none;font-weight:500;}
+nav a:hover{color:var(--accent);}
+.hero{max-width:960px;margin:4rem auto;text-align:center;}
+.hero h1{font-size:2.5rem;margin-bottom:1rem;}
+.hero p{font-size:1.2rem;color:var(--sub);}
+.section{max-width:960px;margin:4rem auto;padding:0 1rem;}
+.section h2{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
+.skills ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem;list-style:none;}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.04);padding:1rem;}
+footer{background:#fff;padding:2rem 0;text-align:center;color:var(--sub);font-size:.9rem;margin-top:4rem;}
+button.cv{background:var(--accent);color:#fff;border:none;padding:.75rem 1.5rem;border-radius:8px;font-weight:600;cursor:pointer;}
+button.cv:hover{opacity:.9;}
+@media(max-width:600px){.hero h1{font-size:2rem;}}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo"><strong>Your&nbsp;Name</strong></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Hi, I'm Your Name</h1>
+  <p>Bioinformatician &amp; Data Scientist at a public hospital, focusing on clinical data.</p>
+  <a href="CV.pdf" download><button class="cv">Download CV</button></a>
+</section>
+
+<section id="about" class="section about">
+  <h2>About Me</h2>
+  <p>I work in the intersection of healthcare and data, building pipelines that transform raw clinical data into actionable insights. I'm passionate about improving patient outcomes through robust bioinformatics and reproducible research workflows.</p>
+</section>
+
+<section id="skills" class="section skills">
+  <h2>Skills</h2>
+  <ul>
+    <li>Python &amp; R</li>
+    <li>Next‑generation sequencing analysis</li>
+    <li>Machine learning (scikit‑learn, PyTorch)</li>
+    <li>Data visualisation (ggplot2, matplotlib, seaborn)</li>
+    <li>SQL &amp; data warehousing</li>
+    <li>Workflow management (Snakemake, Nextflow)</li>
+    <li>Git &amp; GitHub</li>
+    <li>Linux &amp; HPC</li>
+  </ul>
+</section>
+
+<section id="projects" class="section">
+  <h2>Selected Projects</h2>
+  <div class="project-grid">
+    <div class="card">
+      <h3>Clinical Genomics Pipeline</h3>
+      <p>A reproducible pipeline (Snakemake) for variant calling and annotation, now used in routine diagnostics.</p>
+      <a href="#" target="_blank">Repository</a>
+    </div>
+    <div class="card">
+      <h3>ICU Data Dashboard</h3>
+      <p>Interactive dashboard (Python, Plotly Dash) visualising real‑time ICU metrics to assist clinicians.</p>
+      <a href="#" target="_blank">Repository</a>
+    </div>
+    <div class="card">
+      <h3>Antimicrobial Resistance Predictor</h3>
+      <p>Machine‑learning model predicting antibiotic resistance from genomic data.</p>
+      <a href="#" target="_blank">Repository</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+  <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+</section>
+
+<footer>
+  &copy; 2025 Your Name. Built with ❤ and hosted on GitHub Pages.
+</footer>
+</body>
+</html>
