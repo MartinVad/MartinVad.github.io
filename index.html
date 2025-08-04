@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Consider adding a descriptive <meta name="description"> tag for better SEO -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Martin Møller | Bioinformatician & Data Scientist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- In production, prefer a self‑hosted Tailwind build instead of the CDN for smaller, purged CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
+    /* Consider moving custom styles to a separate CSS file to leverage browser caching */
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -29,8 +32,13 @@
 
   <!-- Hero -->
   <section id="top" class="max-w-5xl mx-auto px-4 py-20 text-center">
+    <!-- Profile Image -->
+    <div class="flex justify-center mb-6">
+      <!-- Use loading="lazy" to defer off‑screen image for faster initial load -->
+      <img src="profile.jpg" alt="Martin Møller portrait" class="w-40 h-40 rounded-full object-cover shadow-lg" loading="lazy">
+    </div>
     <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Martin Møller</h2>
-    <p class="text-lg sm:text-xl mb-6">Bioinformatician & Data Scientist focused on clinical genomics and healthcare analytics.</p>
+    <p class="text-lg sm:text-xl mb-6">Bioinformatician &amp; Data Scientist focused on clinical genomics and healthcare analytics.</p>
     <a href="#projects" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full shadow hover:bg-blue-700 transition">View My Work</a>
   </section>
 
@@ -55,22 +63,23 @@
   <section id="projects" class="bg-white py-16">
     <div class="max-w-5xl mx-auto px-4">
       <h3 class="text-2xl font-semibold mb-8 text-center">Selected Projects</h3>
+      <!-- TODO: Replace with componentised project cards (could be generated from Markdown/JSON for easier maintenance) -->
     </div>
   </section>
 
   <!-- Skills -->
   <section id="skills" class="py-16">
     <div class="max-w-5xl mx-auto px-4">
-      <h3 class="text-2xl font-semibold mb-8 text-center">Skills & Tools</h3>
+      <h3 class="text-2xl font-semibold mb-8 text-center">Skills &amp; Tools</h3>
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 text-sm">
         <div class="bg-gray-100 p-4 rounded-xl shadow">Python / R</div>
-        <div class="bg-gray-100 p-4 rounded-xl shadow">Nextflow & Snakemake</div>
-        <div class="bg-gray-100 p-4 rounded-xl shadow">SQL & PostgreSQL</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Nextflow &amp; Snakemake</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">SQL &amp; PostgreSQL</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">Machine Learning (scikit‑learn, XGBoost)</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">NGS Data Analysis</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">Data Visualization (Plotly, ggplot2)</div>
-        <div class="bg-gray-100 p-4 rounded-xl shadow">Docker & Kubernetes</div>
-        <div class="bg-gray-100 p-4 rounded-xl shadow">Git & CI/CD (GitHub Actions)</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Docker &amp; Kubernetes</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Git &amp; CI/CD (GitHub Actions)</div>
       </div>
     </div>
   </section>
