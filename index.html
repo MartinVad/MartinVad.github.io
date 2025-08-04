@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<htm  <!-- Navbar -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Martin Møller - Bioinformatician specializing in clinical genomics, healthcare analytics, NGS pipelines, and machine learning at a public hospital in Denmark.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Martin Møller | Bioinformatician & Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- In production, prefer a self‑hosted Tailwind build instead of the CDN for smaller, purged CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .mobile-menu { display: none; }
+    .mobile-menu.active { display: block; }
+    /* Consider moving custom styles to a separate CSS file to leverage browser caching */
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navbar -->
   <header class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-c  <!-- Footer -->
-  <footer class="py-8 text-center text-gray-500 text-sm">
-    © 2025 Martin Møller. All rights reserved.
-  </footer>
-
-  <!-- JavaScript for mobile menu -->
-  <script>
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-      link.addEventListener('click', function() {
-        document.getElementById('mobile-menu').classList.remove('active');
-      });
-    });
-  </script>
-</body>
-</html>>
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-xl font-bold"><a href="#top">Martin Møller</a></h1>
       <nav class="space-x-6 hidden sm:block">
         <a href="#about" class="hover:text-blue-600">About</a>
@@ -47,36 +46,6 @@
         <a href="#contact" class="block py-2 hover:text-blue-600">Contact</a>
       </div>
     </div>
-  </header><head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Martin Møller - Bioinformatician & Data Scientist specializing in clinical genomics, healthcare analytics, NGS pipelines, and machine learning at a public hospital in Denmark.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Martin Møller | Bioinformatician & Data Scientist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- In production, prefer a self‑hosted Tailwind build instead of the CDN for smaller, purged CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .mobile-menu { display: none; }
-    .mobile-menu.active { display: block; }
-    /* Consider moving custom styles to a separate CSS file to leverage browser caching */
-  </style>
-</head>
-<body class="bg-gray-50 text-gray-800">
-  <!-- Navbar -->
-  <header class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold"><a href="#top">Martin Møller</a></h1>
-      <nav class="space-x-6 hidden sm:block">
-        <a href="#about" class="hover:text-blue-600">About</a>
-        <a href="#cv" class="hover:text-blue-600">CV</a>
-        <a href="#projects" class="hover:text-blue-600">Projects</a>
-        <a href="#skills" class="hover:text-blue-600">Skills</a>
-        <a href="#contact" class="hover:text-blue-600">Contact</a>
-      </nav>
-    </div>
   </header>
 
   <!-- Hero -->
@@ -84,9 +53,9 @@
     <!-- Profile Image -->
     <div class="flex justify-center mb-6">
       <!-- Use loading="lazy" to defer off‑screen image for faster initial load -->
-      <img src="profile.jpg" alt="Martin Møller portrait" class="w-40 h-40 rounded-full object-cover shadow-lg" loading="lazy">
+      <img src="profile.jpg" alt="Martin Møller portrait" class="w-40 h-40 rounded-full object-cover shadow-lg" loading="lazy">
     </div>
-    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Martin Møller</h2>
+    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Martin Møller</h2>
     <p class="text-lg sm:text-xl mb-6">Bioinformatician &amp; Data Scientist focused on clinical genomics and healthcare analytics.</p>
     <a href="#projects" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full shadow hover:bg-blue-700 transition">View My Work</a>
   </section>
@@ -102,9 +71,9 @@
   <!-- CV Link -->
   <section id="cv" class="py-16">
     <div class="max-w-3xl mx-auto px-4 text-center">
-      <h3 class="text-2xl font-semibold mb-6">Curriculum Vitae</h3>
+      <h3 class="text-2xl font-semibold mb-6">Curriculum Vitae</h3>
       <p class="mb-6">Download my full CV for details on publications, experience, and education.</p>
-      <a href="CV.pdf" class="bg-gray-900 text-white px-6 py-3 rounded-full shadow hover:bg-gray-700 transition" target="_blank">Download PDF</a>
+      <a href="CV.pdf" class="bg-gray-900 text-white px-6 py-3 rounded-full shadow hover:bg-gray-700 transition" target="_blank">Download PDF</a>
     </div>
   </section>
 
@@ -122,19 +91,23 @@
             <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Docker</span>
             <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Python</span>
           </div>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">View Project →</a>
+          <div class="text-xs text-gray-500 mb-2">🔒 Private Repository (Hospital GitLab)</div>
+          <p class="text-xs text-gray-500">Code samples and documentation available upon request</p>
         </div>
         
         <!-- Project 2 -->
         <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h4 class="text-lg font-semibold mb-3">Clinical Data Analytics</h4>
-          <p class="text-gray-600 mb-4">Machine learning models for predicting patient outcomes using electronic health record data.</p>
+          <h4 class="text-lg font-semibold mb-3">Clinical Data Analytics Platform</h4>
+          <p class="text-gray-600 mb-4">Machine learning models for predicting patient outcomes using electronic health record data. Includes automated feature engineering and model deployment pipeline.</p>
           <div class="flex flex-wrap gap-2 mb-4">
             <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Python</span>
             <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">scikit-learn</span>
             <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">PostgreSQL</span>
           </div>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">View Project →</a>
+          <div class="text-xs text-gray-500 mb-2">🔒 Private Repository (Hospital GitLab)</div>
+          <div class="text-xs text-gray-500">
+            <strong>Key achievements:</strong> 92% accuracy in risk prediction • 30% reduction in processing time • Deployed to production serving 500+ daily predictions
+          </div>
         </div>
         
         <!-- Project 3 -->
@@ -157,12 +130,12 @@
     <div class="max-w-5xl mx-auto px-4">
       <h3 class="text-2xl font-semibold mb-8 text-center">Skills &amp; Tools</h3>
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 text-sm">
-        <div class="bg-gray-100 p-4 rounded-xl shadow">Python / R</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Python / R</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">Nextflow &amp; Snakemake</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">SQL &amp; PostgreSQL</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">Machine Learning (scikit‑learn, XGBoost)</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">NGS Data Analysis</div>
-        <div class="bg-gray-100 p-4 rounded-xl shadow">Data Visualization (Plotly, ggplot2)</div>
+        <div class="bg-gray-100 p-4 rounded-xl shadow">Data Visualization (Plotly, ggplot2)</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">Docker &amp; Kubernetes</div>
         <div class="bg-gray-100 p-4 rounded-xl shadow">Git &amp; CI/CD (GitHub Actions)</div>
       </div>
@@ -175,7 +148,7 @@
       <h3 class="text-2xl font-semibold mb-4">Get in Touch</h3>
       <p class="mb-6">Feel free to reach out for collaborations or just a friendly chat.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="mailto:martinvadmoller@gmail.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Email Me</a>
+        <a href="mailto:martinvadmoller@gmail.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Email Me</a>
         <a href="https://www.linkedin.com/in/mvmoeller/" class="bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition" target="_blank">LinkedIn</a>
       </div>
     </div>
@@ -183,7 +156,22 @@
 
   <!-- Footer -->
   <footer class="py-8 text-center text-gray-500 text-sm">
-    © 2025 Martin Møller. All rights reserved.
+    © 2025 Martin Møller. All rights reserved.
   </footer>
+
+  <!-- JavaScript for mobile menu -->
+  <script>
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.remove('active');
+      });
+    });
+  </script>
 </body>
 </html>
