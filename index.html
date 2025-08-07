@@ -1,390 +1,435 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Martin Vad Møller - Multidisciplinary bioinformatician with hands-on experience in sequencing, data processing, simulation, infrastructure, and workflow automation. Bioinformatician | Software Developer | IT Consultant based in Esbjerg, Denmark.">
+  <meta name="description" content="Martin Vad Møller – Multidisciplinary enthusiast bioinformatician with hands-on experience in sequencing, data processing, simulation, infrastructure, and workflow automation.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Martin Vad Møller | Bioinformatician & Software Developer</title>
+
+  <!-- Fonts & Tailwind -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- In production, prefer a self‑hosted Tailwind build instead of the CDN for smaller, purged CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Initialise dark mode on first paint -->
+  <script>
+    if (localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+
+  <!-- Animate on scroll library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .mobile-menu { display: none; }
-    .mobile-menu.active { display: block; }
-    /* Consider moving custom styles to a separate CSS file to leverage browser caching */
+    body{font-family:'Inter',sans-serif;}
+    .mobile-menu{display:none;}
+    .mobile-menu.active{display:block;}
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Animate education timeline */
+    .education-item {
+      position: relative;
+    }
+    .education-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -20px;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(to bottom, #3b82f6, transparent);
+      border-radius: 4px;
+      opacity: 0.7;
+    }
+    
+    /* Enhanced skill bars */
+    .skill-bar {
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      background-color: rgba(59, 130, 246, 0.2);
+      transition: width 1s ease-in-out;
+    }
+    .skill-bar.animate::after {
+      width: 100%;
+    }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-  <!-- Navbar -->
-  <header class="bg-white shadow sticky top-0 z-50">
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+  <!-- ░░░ NAVBAR ░░░ -->
+  <header class="bg-white shadow sticky top-0 z-50 dark:bg-gray-800 dark:shadow-gray-900/40">
     <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-xl font-bold"><a href="#top">Martin Vad Møller</a></h1>
+
+      <!-- Desktop nav -->
       <nav class="space-x-6 hidden sm:block">
-        <a href="#about" class="hover:text-blue-600">About</a>
-        <a href="#education" class="hover:text-blue-600">Education</a>
-        <a href="#experience" class="hover:text-blue-600">Experience</a>
-        <a href="#skills" class="hover:text-blue-600">Skills</a>
-        <a href="#projects" class="hover:text-blue-600">Projects</a>
-        <a href="#personal-life" class="hover:text-blue-600">Personal</a>
-        <a href="#contact" class="hover:text-blue-600">Contact</a>
+        <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400">About</a>
+        <a href="#education" class="hover:text-blue-600 dark:hover:text-blue-400">Education</a>
+        <a href="#experience" class="hover:text-blue-600 dark:hover:text-blue-400">Experience</a>
+        <a href="#skills" class="hover:text-blue-600 dark:hover:text-blue-400">Skills</a>
+        <a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400">Projects</a>
+        <a href="#personal-life" class="hover:text-blue-600 dark:hover:text-blue-400">Personal</a>
+        <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
       </nav>
-      <!-- Mobile menu button -->
-      <button class="sm:hidden" id="mobile-menu-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
+
+      <!-- Theme toggle & mobile button -->
+      <div class="flex items-center gap-4">
+        <!-- Dark-light toggle -->
+        <button id="theme-toggle" class="w-6 h-6 text-gray-600 hover:text-yellow-500 dark:text-gray-300 dark:hover:text-yellow-300 transition-colors">
+          <svg id="theme-toggle-light" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M6.05 6.05L4.636 4.636m12.728 0L15.95 6.05M6.05 17.95l-1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+          </svg>
+          <svg id="theme-toggle-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+          </svg>
+        </button>
+
+        <!-- Hamburger -->
+        <button class="sm:hidden" id="mobile-menu-button">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
     </div>
-    <!-- Mobile menu -->
-    <div class="mobile-menu sm:hidden bg-white border-t" id="mobile-menu">
+
+    <!-- Mobile nav -->
+    <div id="mobile-menu" class="mobile-menu sm:hidden bg-white border-t dark:bg-gray-800 dark:border-gray-700">
       <div class="px-4 py-2 space-y-2">
-        <a href="#about" class="block py-2 hover:text-blue-600">About</a>
-        <a href="#education" class="block py-2 hover:text-blue-600">Education</a>
-        <a href="#experience" class="block py-2 hover:text-blue-600">Experience</a>
-        <a href="#skills" class="block py-2 hover:text-blue-600">Skills</a>
-        <a href="#projects" class="block py-2 hover:text-blue-600">Projects</a>
-        <a href="#personal-life" class="block py-2 hover:text-blue-600">Personal</a>
-        <a href="#contact" class="block py-2 hover:text-blue-600">Contact</a>
+        <a href="#about" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">About</a>
+        <a href="#education" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Education</a>
+        <a href="#experience" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Experience</a>
+        <a href="#skills" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Skills</a>
+        <a href="#projects" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Projects</a>
+        <a href="#personal-life" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Personal</a>
+        <a href="#contact" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- ░░░ HERO ░░░ -->
   <section id="top" class="max-w-5xl mx-auto px-4 py-20 text-center">
-    <!-- Profile Image -->
     <div class="flex justify-center mb-6">
-      <!-- Use loading="lazy" to defer off‑screen image for faster initial load -->
-      <img src="profile.jpg" alt="Martin Møller portrait" class="w-40 h-40 rounded-full object-cover shadow-lg" loading="lazy">
+      <img src="profile.jpg" alt="Martin Møller portrait"
+           class="w-40 h-40 rounded-full object-cover shadow-lg dark:shadow-gray-800/60" loading="lazy">
     </div>
     <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Martin Vad Møller</h2>
-    <p class="text-lg sm:text-xl mb-2">🧬 Bioinformatician | Software Developer | IT Consultant</p>
-    <p class="text-base text-gray-600 mb-4">📧 martinvadmoller@gmail.com | 📞 (+45) 22 97 10 95 | 📍 Esbjerg, Denmark</p>
-    <p class="text-lg sm:text-xl mb-6">Equally comfortable at the bench and in the terminal, I've developed pipelines, built simulations of spatial transcriptomics, and deployed IT solutions across healthcare and private industry.</p>
+    <p class="text-lg sm:text-xl mb-2">🧬 Bioinformatician | Technical Helper | IT Consultant</p>
+    <p class="text-base text-gray-600 dark:text-gray-400 mb-4">📧 martinvadmoller@gmail.com • Esbjerg, Denmark</p>
+    <p class="text-lg sm:text-xl mb-6">Transforming clinical sequencing data into actionable insights while automating infrastructure and workflows across public healthcare and private consulting.</p>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#experience" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full shadow hover:bg-blue-700 transition">View Experience</a>
-      <a href="#projects" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-full shadow hover:bg-gray-700 transition">See Projects</a>
+      <a href="#experience" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full shadow hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 transition">View Experience</a>
+      <a href="#projects" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-full shadow hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 transition">See Projects</a>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="bg-white py-16">
+  <!-- ░░░ ABOUT ░░░ -->
+  <section id="about" class="py-16 bg-white dark:bg-gray-800">
     <div class="max-w-4xl mx-auto px-4">
       <h3 class="text-3xl font-bold mb-8 text-center">About Me</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-8">
         <div>
           <h4 class="text-xl font-semibold mb-4">🧠 Professional Strengths</h4>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Automation and workflow optimization</li>
-            <li>• R&D and sequencing data analysis</li>
-            <li>• Scripting and cross-disciplinary collaboration</li>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+            <li>• Workflow automation & CI/CD</li>
+            <li>• Microbial & spatial-omics data analysis</li>
+            <li>• Cross-disciplinary collaboration & consulting</li>
           </ul>
+
           <div class="mt-8">
-            <h4 class="text-xl font-semibold mb-4">� Languages</h4>
+            <h4 class="text-xl font-semibold mb-4">🌐 Languages</h4>
             <div class="flex flex-wrap gap-4">
-              <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full">Danish - Native</span>
-              <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full">English - Professional proficiency</span>
+              <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full dark:bg-blue-900 dark:text-blue-200">Danish – Native</span>
+              <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full dark:bg-green-900 dark:text-green-200">English – Professional</span>
             </div>
           </div>
         </div>
+
         <div>
-          <h4 class="text-xl font-semibold mb-4">� Personal Qualities</h4>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Detail-oriented and analytical mindset</li>
-            <li>• Curious and independent learner</li>
-            <li>• Dependable team player</li>
+          <h4 class="text-xl font-semibold mb-4">✨ Personal Qualities</h4>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+            <li>• Detail-oriented & analytical</li>
+            <li>• Curious, independent learner</li>
+            <li>• Reliable team player</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Education -->
+  <!-- ░░░ EDUCATION ░░░ -->
   <section id="education" class="py-16">
     <div class="max-w-5xl mx-auto px-4">
-      <h3 class="text-3xl font-bold mb-12 text-center">🎓 Education</h3>
-      <div class="space-y-8">
-        <!-- MSc -->
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-            <div>
-              <h4 class="text-xl font-semibold text-blue-600">MSc in Bioinformatics</h4>
-              <p class="text-gray-600">University of Southern Denmark (SDU), Odense</p>
-            </div>
-            <span class="text-gray-500 font-medium">Oct. 2021</span>
-          </div>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Simulated artificial MERFISH data with embedded microscopic artifacts to mimic real experimental conditions</li>
-            <li>• <strong>Thesis:</strong> Analysis of spatial transcriptomic data based on image segmentation and single-molecule FISH data</li>
-            <li>• <strong>Skills gained:</strong> independent research, programming, simulation, and scientific project management</li>
-          </ul>
-        </div>
+      <h3 class="text-3xl font-bold mb-12 text-center" data-aos="fade-up">🎓 Education</h3>
 
-        <!-- BSc -->
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-            <div>
-              <h4 class="text-xl font-semibold text-blue-600">BSc in Biomedicine</h4>
-              <p class="text-gray-600">University of Southern Denmark (SDU), Odense</p>
-            </div>
-            <span class="text-gray-500 font-medium">Jun. 2019</span>
+      <!-- MSc -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg mb-8 education-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex flex-col md:flex-row md:justify-between mb-4">
+          <div>
+            <h4 class="text-xl font-semibold text-blue-600">M.Sc. in Bioinformatics</h4>
+            <p class="text-gray-600 dark:text-gray-400">University of Southern Denmark (SDU), Odense</p>
           </div>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Focus on nanoparticle-based delivery of anti-inflammatory drugs for joint inflammation</li>
-            <li>• <strong>Thesis:</strong> In vitro study of glucocorticoid-loaded nanoparticles for rheumatoid arthritis treatment</li>
-            <li>• Learned to approach scientific challenges analytically, independently, and with detail-oriented thinking</li>
-          </ul>
+          <span class="text-gray-500 md:ml-4 flex items-center md:text-right">
+            <svg class="w-4 h-4 mr-1 inline text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            Oct 2021
+          </span>
         </div>
+        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+          <li>• Simulated MERFISH data with microscopic artefacts to mimic real experiments.</li>
+          <li>• <strong>Thesis:</strong> Analysis of spatial transcriptomic data based on image segmentation and single-molecule FISH.</li>
+        </ul>
+      </div>
 
-        <!-- High School -->
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-            <div>
-              <h4 class="text-xl font-semibold text-blue-600">High School Diploma</h4>
-              <p class="text-gray-600">Rybners Technical Gymnasium</p>
-            </div>
-            <span class="text-gray-500 font-medium">Jun. 2015</span>
+      <!-- BSc -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg mb-8 education-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="flex flex-col md:flex-row md:justify-between mb-4">
+          <div>
+            <h4 class="text-xl font-semibold text-blue-600">B.Sc. in Biomedicine</h4>
+            <p class="text-gray-600 dark:text-gray-400">University of Southern Denmark (SDU), Odense</p>
           </div>
-          <p class="text-gray-700">A-levels in Mathematics, Chemistry, Danish, Technology, and Biology</p>
+          <span class="text-gray-500 md:ml-4 flex items-center md:text-right">
+            <svg class="w-4 h-4 mr-1 inline text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            Jun 2019
+          </span>
         </div>
+        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+          <li>• Focused on nanoparticle delivery of anti-inflammatory drugs for joint inflammation.</li>
+          <li>• <strong>Thesis:</strong> In vitro study of glucocorticoid-loaded nanoparticles for rheumatoid-arthritis therapy.</li>
+        </ul>
+      </div>
+      
+      <!-- High school -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div class="flex flex-col md:flex-row md:justify-between mb-4">
+          <div>
+            <h4 class="text-xl font-semibold text-blue-600">Higher Technical Examination</h4>
+            <p class="text-gray-600 dark:text-gray-400">Rybners Tekniske Gymnasium, Esbjerg</p>
+          </div>
+          <span class="text-gray-500">Jun 2015</span>
+        </div>
+        <p class="text-gray-700 dark:text-gray-300">A-levels: Mathematics, Chemistry, Danish, Technology, Biology.</p>
       </div>
     </div>
   </section>
 
-  <!-- Experience -->
-  <section id="experience" class="bg-white py-16">
+  <!-- ░░░ EXPERIENCE ░░░ -->
+  <section id="experience" class="py-16 bg-white dark:bg-gray-800">
     <div class="max-w-5xl mx-auto px-4">
       <h3 class="text-3xl font-bold mb-12 text-center">💼 Work Experience</h3>
       <div class="space-y-8">
-        <!-- Current positions -->
-        <div class="bg-gray-50 p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+
+        <!-- BioLinkData -->
+        <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
+          <div class="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
               <h4 class="text-xl font-semibold text-blue-600">Founder / Consultant</h4>
-              <p class="text-gray-600">BioLinkData Consulting, Esbjerg, Denmark</p>
+              <p class="text-gray-600 dark:text-gray-400">BioLinkData Consulting, Esbjerg, Denmark</p>
             </div>
-            <span class="text-gray-500 font-medium">Jan. 2024 – Present</span>
+            <span class="text-gray-500">Jan 2024 – Present</span>
           </div>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Founded a one-man consulting firm offering IT and digital visibility solutions</li>
-            <li>• Built websites, optimized SEO, managed Google/Facebook business presence</li>
-            <li>• Provided drone footage and digital strategy for local clients</li>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+            <li>• IT & web consulting: from SEO-optimised sites to drone videography.</li>
+            <li>• Delivered end-to-end digital presence for local businesses and NGOs.</li>
           </ul>
         </div>
 
-        <div class="bg-gray-50 p-6 rounded-xl shadow-lg border-l-4 border-green-500">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+        <!-- Hospital -->
+        <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+          <div class="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
               <h4 class="text-xl font-semibold text-green-600">Bioinformatician</h4>
-              <p class="text-gray-600">South West Jutland Hospital (Sydvestjysk Sygehus), Region of Southern Denmark</p>
+              <p class="text-gray-600 dark:text-gray-400">South West Jutland Hospital, Region of Southern Denmark</p>
             </div>
-            <span class="text-gray-500 font-medium">May 2022 – Present</span>
+            <span class="text-gray-500">May 2022 – Present</span>
           </div>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Developed and automated bioinformatics pipelines, including microbial analysis using Oxford Nanopore sequencing</li>
-            <li>• Introduced new software solutions to replace outdated workflows</li>
-            <li>• Improved data security and sharing infrastructure, minimizing research data loss risk</li>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+            <li>• Automated microbial-analysis pipelines using Oxford Nanopore sequencing.</li>
+            <li>• Replaced legacy Excel workflows with containerised Nextflow processes.</li>
+            <li>• Hardened data-sharing and backup infrastructure, reducing data-loss risk.</li>
           </ul>
         </div>
 
-        <div class="bg-gray-50 p-6 rounded-xl shadow-lg border-l-4 border-purple-500">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+        <!-- Asom-NET -->
+        <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg border-l-4 border-purple-500">
+          <div class="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
-              <h4 class="text-xl font-semibold text-purple-600">Technical Supporter</h4>
-              <p class="text-gray-600">Asom-NET, Vejen, Denmark</p>
+              <h4 class="text-xl font-semibold text-purple-600">Technical Support Specialist</h4>
+              <p class="text-gray-600 dark:text-gray-400">Asom-NET, Vejen, Denmark</p>
             </div>
-            <span class="text-gray-500 font-medium">Oct. 2017 – Present</span>
+            <span class="text-gray-500">Oct 2017 – Present</span>
           </div>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Provided front-line technical support for TV, internet, and phone customers</li>
-            <li>• Diagnosed and resolved issues remotely for over 75,000 members in housing and antenna associations</li>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+            <li>• Troubleshoot TV, internet & VoIP for 75 000+ customers.</li>
+            <li>• Coordinated on-call escalations and wrote internal troubleshooting guides.</li>
           </ul>
         </div>
 
-        <!-- Previous positions -->
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+        <!-- Freelance -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+          <div class="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
               <h4 class="text-xl font-semibold">Freelance Developer</h4>
-              <p class="text-gray-600">PentaBase, Odense, Denmark</p>
+              <p class="text-gray-600 dark:text-gray-400">PentaBase, Odense</p>
             </div>
-            <span class="text-gray-500 font-medium">Mar. 2020 – Jun. 2020</span>
+            <span class="text-gray-500">Mar 2020 – Jun 2020</span>
           </div>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Supported rapid software development during the COVID-19 pandemic</li>
-            <li>• Deployed servers and software for managing test samples and lab infrastructure</li>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+            <li>• Deployed LIMS-adjacent infrastructure for mass COVID-19 testing.</li>
           </ul>
         </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+        <!-- Teaching -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+          <div class="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
               <h4 class="text-xl font-semibold">Substitute Teacher</h4>
-              <p class="text-gray-600">Gredstedbro School</p>
+              <p class="text-gray-600 dark:text-gray-400">Gredstedbro School</p>
             </div>
-            <span class="text-gray-500 font-medium">Sep. 2015 – Jun. 2016</span>
+            <span class="text-gray-500">Sep 2015 – Jun 2016</span>
           </div>
-          <p class="text-gray-700">Taught classes from 0. to 9. grade</p>
+          <p class="text-gray-700 dark:text-gray-300">Taught grades 0–9 across STEM subjects.</p>
         </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+        <!-- Sales -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+          <div class="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
-              <h4 class="text-xl font-semibold">Sales Assistant (Radio/TV)</h4>
-              <p class="text-gray-600">Føtex, Ribe, Denmark</p>
+              <h4 class="text-xl font-semibold">Sales Assistant – Radio/TV</h4>
+              <p class="text-gray-600 dark:text-gray-400">Føtex, Ribe</p>
             </div>
-            <span class="text-gray-500 font-medium">Apr. 2012 – Dec. 2016</span>
+            <span class="text-gray-500">Apr 2012 – Dec 2016</span>
           </div>
-          <p class="text-gray-700">Sold electronics and provided customer-tailored solutions</p>
+          <p class="text-gray-700 dark:text-gray-300">Matched customers with tailored home-electronics solutions.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="bg-white py-16">
+  <!-- ░░░ PROJECTS ░░░ -->
+  <section id="projects" class="py-16">
     <div class="max-w-5xl mx-auto px-4">
       <h3 class="text-2xl font-semibold mb-8 text-center">Selected Projects</h3>
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
         <!-- Project 1 -->
-        <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-lg transition">
+        <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
           <h4 class="text-lg font-semibold mb-3">NGS Pipeline Framework</h4>
-          <p class="text-gray-600 mb-4">Scalable Nextflow pipeline for clinical genomics processing with automated quality control and variant calling.</p>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Scalable Nextflow pipeline for clinical genomics with automated QC and variant calling.</p>
           <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Nextflow</span>
-            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Docker</span>
-            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Python</span>
+            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs dark:bg-blue-900 dark:text-blue-200">Nextflow</span>
+            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs dark:bg-green-900 dark:text-green-200">Docker</span>
+            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs dark:bg-purple-900 dark:text-purple-200">Python</span>
           </div>
-          <div class="text-xs text-gray-500 mb-2">🔒 Private Repository (Hospital GitLab)</div>
-          <p class="text-xs text-gray-500">Code samples and documentation available upon request</p>
+          <p class="text-xs text-gray-500">🔒 Private Hospital GitLab – code samples on request.</p>
         </div>
-        
+
         <!-- Project 2 -->
-        <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-lg transition">
+        <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
           <h4 class="text-lg font-semibold mb-3">Clinical Isolate WGS Pipeline</h4>
-          <p class="text-gray-600 mb-4">Nextflow WGS pipeline for analyzing clinical isolate genomes using Nomad cluster orchestration for scalable processing.</p>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Nextflow pipeline running on Nomad for bacterial genome assembly <em>within 24 h</em>.</p>
           <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Nextflow</span>
-            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Nomad</span>
-            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">WGS</span>
-            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Genomics</span>
+            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs dark:bg-blue-900 dark:text-blue-200">Nextflow</span>
+            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs dark:bg-green-900 dark:text-green-200">Nomad</span>
+            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs dark:bg-yellow-900 dark:text-yellow-200">Genomics</span>
           </div>
-          <div class="text-xs text-gray-500 mb-2">🔒 Private Repository (Hospital GitLab)</div>
-          <div class="text-xs text-gray-500">
-            <strong>Key achievements:</strong> From isolate to results in approximately 24 hours • Automated quality control • Scalable cluster processing
-          </div>
-        </div>        
+          <p class="text-xs text-gray-500">🔒 Private Hospital GitLab – documentation on request.</p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Technical Skills -->
-  <section id="skills" class="py-16">
+  <!-- ░░░ SKILLS ░░░ -->
+  <section id="skills" class="py-16 bg-white dark:bg-gray-800">
     <div class="max-w-5xl mx-auto px-4">
       <h3 class="text-3xl font-bold mb-12 text-center">🛠 Technical Skills</h3>
-      <div class="bg-white p-8 rounded-xl shadow-lg">
+      <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg">
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">Python</span>
-            <span class="text-yellow-400">★★★★★</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">R</span>
-            <span class="text-yellow-400">★★★★★</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">Docker</span>
-            <span class="text-yellow-400">★★★★★</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">NextFlow</span>
-            <span class="text-yellow-400">★★★★★</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">CI/CD (GitLab)</span>
-            <span class="text-yellow-400">★★★★☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">Nomad</span>
-            <span class="text-yellow-400">★★★★☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">Unix/Linux</span>
-            <span class="text-yellow-400">★★★★☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">Git</span>
-            <span class="text-yellow-400">★★★★☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">Microsoft Office</span>
-            <span class="text-yellow-400">★★★★☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">Java</span>
-            <span class="text-yellow-400">★★★☆☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">TypeScript</span>
-            <span class="text-yellow-400">★★☆☆☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">HTML</span>
-            <span class="text-yellow-400">★★★☆☆</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="font-semibold">LaTeX</span>
-            <span class="text-yellow-400">★★★☆☆</span>
-          </div>
+          <div class="flex justify-between"><span class="font-semibold">Python</span><span class="text-yellow-400">★★★★★</span></div>
+          <div class="flex justify-between"><span class="font-semibold">R</span><span class="text-yellow-400">★★★★★</span></div>
+          <div class="flex justify-between"><span class="font-semibold">Docker</span><span class="text-yellow-400">★★★★★</span></div>
+          <div class="flex justify-between"><span class="font-semibold">Nextflow</span><span class="text-yellow-400">★★★★★</span></div>
+          <div class="flex justify-between"><span class="font-semibold">CI/CD (GitLab)</span><span class="text-yellow-400">★★★★☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">Nomad</span><span class="text-yellow-400">★★★★☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">Unix/Linux</span><span class="text-yellow-400">★★★★☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">Git</span><span class="text-yellow-400">★★★★☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">Microsoft Office</span><span class="text-yellow-400">★★★★☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">Java</span><span class="text-yellow-400">★★★☆☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">TypeScript</span><span class="text-yellow-400">★★☆☆☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">HTML/CSS</span><span class="text-yellow-400">★★★☆☆</span></div>
+          <div class="flex justify-between"><span class="font-semibold">LaTeX</span><span class="text-yellow-400">★★★☆☆</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Conferences & Other Experience -->
-  <section id="other" class="bg-white py-16">
+  <!-- ░░░ CONFERENCES & VOLUNTEERING ░░░ -->
+  <section id="other" class="py-16">
     <div class="max-w-5xl mx-auto px-4">
       <div class="grid md:grid-cols-2 gap-8">
+
         <!-- Conferences -->
-        <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-          <h3 class="text-2xl font-bold mb-6">📢 Conferences & Presentations</h3>
+        <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg">
+          <h3 class="text-2xl font-bold mb-6">📢 Conferences & Posters</h3>
           <div class="space-y-4">
-            <div>
-              <h4 class="font-semibold text-blue-600">ECCMID 2024 (ESCMID)</h4>
-              <p class="text-sm text-gray-600">Poster: Comparative study of gDNA extraction from clinically relevant species for third-generation sequencing</p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-blue-600">ESCMID 2025</h4>
-            </div>
-            <div>
-              <h4 class="font-semibold text-blue-600">ABPHM 2023</h4>
-              <p class="text-sm text-gray-600">Applied Bioinformatics and Public Health Microbiology</p>
-            </div>
+            <div><h4 class="font-semibold text-blue-600">ECCMID 2024</h4><p class="text-sm text-gray-600 dark:text-gray-400">Poster – Comparative gDNA extraction for 3rd-gen sequencing.</p></div>
+            <div><h4 class="font-semibold text-blue-600">ESCMID 2025</h4><p class="text-sm text-gray-600 dark:text-gray-400">Accepted abstract (oral session).</p></div>
+            <div><h4 class="font-semibold text-blue-600">ABPHM 2023</h4><p class="text-sm text-gray-600 dark:text-gray-400">Applied Bioinformatics & Public Health Microbiology.</p></div>
           </div>
         </div>
 
-        <!-- Other Experience -->
-        <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
+        <!-- Volunteering -->
+        <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg">
           <h3 class="text-2xl font-bold mb-6">💡 Voluntary Experience</h3>
           <div class="space-y-4">
             <div>
-              <h4 class="font-semibold">Board Member - DSIO</h4>
-              <p class="text-sm text-gray-600">Student Sports Association, Odense (Feb. 2021 – Feb. 2022)</p>
-              <p class="text-sm text-gray-500">Treasurer and clubhouse manager</p>
+              <h4 class="font-semibold">Board Member – DSIO</h4>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Student Sports Association, Odense (Feb 2021 – Feb 2022)</p>
+              <p class="text-sm text-gray-500">Treasurer & clubhouse manager.</p>
             </div>
             <div>
               <h4 class="font-semibold">International Volunteer & Travel</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Peru (2019) – Cultural exploration</li>
-                <li>• Australia (2016) – WWOOF organic farming volunteer</li>
-                <li>• Canada (2015–2016) – Agriculture and fur industry</li>
+              <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                <li>• Peru 2019 – cultural exchange</li>
+                <li>• Australia 2016 – WWOOF organic farming</li>
+                <li>• Canada 2015-16 – agriculture & fur industry</li>
               </ul>
             </div>
             <div>
               <h4 class="font-semibold">Football School Trainer</h4>
-              <p class="text-sm text-gray-600">Youth football coach (Aug. 2012 – Aug. 2015)</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Youth coach (Aug 2012 – Aug 2015)</p>
             </div>
           </div>
         </div>
@@ -392,101 +437,171 @@
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="bg-white py-16">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h3 class="text-2xl font-semibold mb-4">Get in Touch</h3>
-      <p class="mb-6">Feel free to reach out for collaborations or just a friendly chat.</p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-        <a href="mailto:martinvadmoller@gmail.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Email Me</a>
-        <a href="https://www.linkedin.com/in/mvmoeller/" class="bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition" target="_blank">LinkedIn</a>
-      </div>
-      
-      <!-- Development Profiles -->
-      <div class="border-t pt-8">
-        <h4 class="text-lg font-semibold mb-4 text-gray-700">Development Profiles</h4>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="https://github.com/MartinVad" class="flex items-center justify-center bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition" target="_blank">
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            GitHub
-          </a>
-          <a href="https://gitlab.com/martinvad" class="flex items-center justify-center bg-orange-600 text-white px-6 py-3 rounded-full hover:bg-orange-700 transition" target="_blank">
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452-.954 13.587a.905.905 0 0 0 .329 1.013L12 22.12l10.625-7.52a.905.905 0 0 0 .33-1.013Z"/>
-            </svg>
-            GitLab
-          </a>
-        </div>
-        <p class="text-sm text-gray-500 mt-4">Most of my professional work is hosted on GitLab due to organizational requirements</p>
-      </div>
-    </div>
-  </section>
-
-    <!-- Personal Life -->
-  <section id="personal-life" class="bg-gray-50 py-16">
+  <!-- ░░░ PERSONAL ░░░ -->
+  <section id="personal-life" class="py-16 bg-gray-50 dark:bg-gray-900">
     <div class="max-w-5xl mx-auto px-4">
       <h3 class="text-3xl font-bold mb-8 text-center">🕹️ Personal Interests & Life</h3>
-      
-      <!-- Interests -->
-      <div class="mb-12">
-        <div class="grid md:grid-cols-3 gap-6 mb-8">
-          <div class="bg-white p-6 rounded-xl shadow text-center">
-            <h4 class="text-lg font-semibold mb-3 text-blue-600">💻 Tech</h4>
-            <p class="text-gray-600">Hardware, servers, software tinkering</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow text-center">
-            <h4 class="text-lg font-semibold mb-3 text-green-600">🏃‍♂️ Health & Fitness</h4>
-            <p class="text-gray-600">Football, badminton, strength training</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow text-center">
-            <h4 class="text-lg font-semibold mb-3 text-purple-600">🌍 Leisure</h4>
-            <p class="text-gray-600">Walking, running, movies, travel, food, and culture</p>
-          </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow text-center">
+          <h4 class="text-lg font-semibold mb-3 text-blue-600">💻 Tech</h4>
+          <p class="text-gray-600 dark:text-gray-400">Servers, hardware, software tinkering.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow text-center">
+          <h4 class="text-lg font-semibold mb-3 text-green-600">🏃‍♂️ Fitness</h4>
+          <p class="text-gray-600 dark:text-gray-400">Football, badminton, strength training.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow text-center">
+          <h4 class="text-lg font-semibold mb-3 text-purple-600">🌍 Leisure</h4>
+          <p class="text-gray-600 dark:text-gray-400">Running, travel, good food & culture.</p>
         </div>
       </div>
 
-      <!-- Photo Gallery -->
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow hover:shadow-lg transition">
           <img src="images/football.jpg" alt="Playing football" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600">Playing football</p>
+          <p class="text-center text-gray-600 dark:text-gray-400">Weekend football</p>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow hover:shadow-lg transition">
           <img src="images/disc_golf.jpg" alt="Disc golf" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600">Enjoying disc golf</p>
+          <p class="text-center text-gray-600 dark:text-gray-400">Disc golf sessions</p>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow hover:shadow-lg transition">
           <img src="images/pizza.jpg" alt="Making pizza" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600">Making delicious pizzas</p>
+          <p class="text-center text-gray-600 dark:text-gray-400">Neapolitan pizza experiments</p>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow hover:shadow-lg transition">
           <img src="images/coffee.jpg" alt="Coffee time" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600">Relaxing with coffee</p>
+          <p class="text-center text-gray-600 dark:text-gray-400">Third-wave coffee</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-8 text-center text-gray-500 text-sm">
-    © 2025 Martin Møller. All rights reserved.
+  <!-- ░░░ CONTACT ░░░ -->
+  <section id="contact" class="py-16 bg-white dark:bg-gray-800">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h3 class="text-2xl font-semibold mb-4">Get in Touch</h3>
+      <p class="mb-6">Open to collaborations, consulting or just a chat over coffee.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+        <a href="mailto:martinvadmoller@gmail.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 transition">Email Me</a>
+        <a href="https://www.linkedin.com/in/mvmoeller/" target="_blank" class="bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 transition">LinkedIn</a>
+      </div>
+
+      <!-- Dev profiles -->
+      <div class="border-t dark:border-gray-700 pt-8">
+        <h4 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">Development Profiles</h4>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+          <!-- GitHub -->
+          <a href="https://github.com/MartinVad" target="_blank"
+             class="flex items-center justify-center bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 transition">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>GitHub
+          </a>
+
+          <!-- GitLab -->
+          <a href="https://gitlab.com/martinvad" target="_blank"
+             class="flex items-center justify-center bg-orange-600 text-white px-6 py-3 rounded-full hover:bg-orange-700 dark:bg-orange-700 dark:hover:bg-orange-600 transition">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452-.954 13.587a.905.905 0 0 0 .329 1.013L12 22.12l10.625-7.52a.905.905 0 0 0 .33-1.013Z"/>
+            </svg>GitLab
+          </a>
+        </div>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">Most professional work is hosted on GitLab due to organizational policies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░░ FOOTER ░░░ -->
+  <footer class="py-8 text-center text-gray-500 dark:text-gray-400 text-sm">
+    © 2025 Martin Vad Møller. All rights reserved.
   </footer>
 
-  <!-- JavaScript for mobile menu -->
+  <!-- ░░░ JS ░░░ -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('active');
+    /* Initialize AOS */
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
     });
+    
+    /* Mobile menu */
+    document.getElementById('mobile-menu-button')
+      .addEventListener('click',()=>
+        document.getElementById('mobile-menu').classList.toggle('active'));
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-      link.addEventListener('click', function() {
-        document.getElementById('mobile-menu').classList.remove('active');
+    document.querySelectorAll('#mobile-menu a')
+      .forEach(link=>link.addEventListener('click',()=>
+        document.getElementById('mobile-menu').classList.remove('active')));
+
+    /* Theme toggle */
+    const html=document.documentElement;
+    const btn=document.getElementById('theme-toggle');
+    const lightIcon=document.getElementById('theme-toggle-light');
+    const darkIcon=document.getElementById('theme-toggle-dark');
+
+    function setIcons(){  
+      const dark=html.classList.contains('dark');
+      lightIcon.style.display=dark?'block':'none';
+      darkIcon.style.display=dark?'none':'block';
+    }
+    setIcons();
+
+    btn.addEventListener('click',()=>{
+      html.classList.toggle('dark');
+      localStorage.theme=html.classList.contains('dark')?'dark':'light';
+      setIcons();
+    });
+    
+    /* Back to top button */
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+      
+      // Animate skill bars when in viewport
+      document.querySelectorAll('.flex.justify-between').forEach(skillBar => {
+        const rect = skillBar.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          skillBar.classList.add('skill-bar', 'animate');
+        }
+      });
+    });
+    
+    /* Image loading optimization */
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        if (!img.hasAttribute('loading')) {
+          img.setAttribute('loading', 'lazy');
+        }
+        if (!img.hasAttribute('decoding')) {
+          img.setAttribute('decoding', 'async');
+        }
       });
     });
   </script>
+
+  <!-- Back to top button -->
+  <button id="back-to-top" aria-label="Back to top" class="back-to-top bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 transition">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
 </body>
 </html>
