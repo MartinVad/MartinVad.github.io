@@ -6,84 +6,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Martin Vad Møller | Bioinformatician & Software Developer</title>
 
-  <!-- Fonts & Tailwind -->
+  <!-- 1) Apply saved/system theme ASAP (runs before anything renders) -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS: enable dark‑mode switching via the .dark class -->
+  <!-- 2) Tailwind CDN configured for class-based dark mode -->
   <script>
-    tailwind.config = {
-      darkMode: 'class'
-    };
+    tailwind = { config: { darkMode: 'class' } };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Initialise dark mode on first paint -->
-  <script>
-    if (localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    }
-  </script>
+  <!-- AOS (animations) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
 
-  <!-- Animate on scroll library -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  
   <style>
     body{font-family:'Inter',sans-serif;}
     .mobile-menu{display:none;}
     .mobile-menu.active{display:block;}
-    
+
     /* Back to top button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 99;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
+    .back-to-top{position:fixed;bottom:30px;right:30px;z-index:99;opacity:0;visibility:hidden;transition:all .3s;}
+    .back-to-top.visible{opacity:1;visibility:visible;}
+
+    /* Education timeline accent */
+    .education-item{position:relative;}
+    .education-item::before{
+      content:'';position:absolute;top:0;left:-20px;height:100%;width:4px;
+      background:linear-gradient(to bottom,#3b82f6,transparent);border-radius:4px;opacity:.7;
     }
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    /* Animate education timeline */
-    .education-item {
-      position: relative;
-    }
-    .education-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -20px;
-      height: 100%;
-      width: 4px;
-      background: linear-gradient(to bottom, #3b82f6, transparent);
-      border-radius: 4px;
-      opacity: 0.7;
-    }
-    
-    /* Enhanced skill bars */
-    .skill-bar {
-      position: relative;
-      overflow: hidden;
-    }
-    .skill-bar::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 0;
-      background-color: rgba(59, 130, 246, 0.2);
-      transition: width 1s ease-in-out;
-    }
-    .skill-bar.animate::after {
-      width: 100%;
-    }
+
+    /* Skill bars (simple visual effect) */
+    .skill-bar{position:relative;overflow:hidden;}
+    .skill-bar::after{content:'';position:absolute;top:0;left:0;height:100%;width:0;background:rgba(59,130,246,.2);transition:width 1s ease-in-out;}
+    .skill-bar.animate::after{width:100%;}
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
@@ -104,22 +73,25 @@
         <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
       </nav>
 
-      <!-- Theme toggle & mobile button -->
+      <!-- Theme toggle + mobile menu -->
       <div class="flex items-center gap-4">
-        <!-- Dark-light toggle -->
-        <button id="theme-toggle" class="w-6 h-6 text-gray-600 hover:text-yellow-500 dark:text-gray-300 dark:hover:text-yellow-300 transition-colors">
-          <svg id="theme-toggle-light" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Theme toggle -->
+        <button id="theme-toggle" aria-label="Toggle theme" aria-pressed="false"
+                class="w-6 h-6 text-gray-600 hover:text-yellow-500 dark:text-gray-300 dark:hover:text-yellow-300 transition-colors">
+          <!-- Sun -->
+          <svg id="theme-toggle-sun" style="display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M6.05 6.05L4.636 4.636m12.728 0L15.95 6.05M6.05 17.95l-1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z"/>
           </svg>
-          <svg id="theme-toggle-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <!-- Moon -->
+          <svg id="theme-toggle-moon" style="display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
           </svg>
         </button>
 
         <!-- Hamburger -->
-        <button class="sm:hidden" id="mobile-menu-button">
+        <button class="sm:hidden" id="mobile-menu-button" aria-label="Open menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M4 6h16M4 12h16M4 18h16"/>
@@ -499,16 +471,12 @@
       <div class="border-t dark:border-gray-700 pt-8">
         <h4 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">Development Profiles</h4>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-
-          <!-- GitHub -->
           <a href="https://github.com/MartinVad" target="_blank"
              class="flex items-center justify-center bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 transition">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
             </svg>GitHub
           </a>
-
-          <!-- GitLab -->
           <a href="https://gitlab.com/martinvad" target="_blank"
              class="flex items-center justify-center bg-orange-600 text-white px-6 py-3 rounded-full hover:bg-orange-700 dark:bg-orange-700 dark:hover:bg-orange-600 transition">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -526,86 +494,72 @@
     © 2025 Martin Vad Møller. All rights reserved.
   </footer>
 
-  <!-- ░░░ JS ░░░ -->
+  <!-- JS -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    /* Initialize AOS */
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100
-    });
-    
+    /* AOS */
+    AOS.init({ duration: 800, once: true, offset: 100 });
+
     /* Mobile menu */
     document.getElementById('mobile-menu-button')
-      .addEventListener('click',()=>
-        document.getElementById('mobile-menu').classList.toggle('active'));
-
+      .addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('active'));
     document.querySelectorAll('#mobile-menu a')
-      .forEach(link=>link.addEventListener('click',()=>
-        document.getElementById('mobile-menu').classList.remove('active')));
+      .forEach(link=>link.addEventListener('click',()=>document.getElementById('mobile-menu').classList.remove('active')));
 
-    /* Theme toggle */
-    const html=document.documentElement;
-    const btn=document.getElementById('theme-toggle');
-    const lightIcon=document.getElementById('theme-toggle-light');
-    const darkIcon=document.getElementById('theme-toggle-dark');
+    /* THEME TOGGLER */
+    const html = document.documentElement;
+    const btn = document.getElementById('theme-toggle');
+    const sun = document.getElementById('theme-toggle-sun');
+    const moon = document.getElementById('theme-toggle-moon');
 
-    function setIcons(){  
-      const dark=html.classList.contains('dark');
-      lightIcon.style.display=dark?'block':'none';
-      darkIcon.style.display=dark?'none':'block';
+    function updateIcons() {
+      const isDark = html.classList.contains('dark');
+      btn.setAttribute('aria-pressed', String(isDark));
+      // show sun in dark (to switch to light), moon in light (to switch to dark)
+      sun.style.display  = isDark ? 'block' : 'none';
+      moon.style.display = isDark ? 'none'  : 'block';
     }
-    setIcons();
+    updateIcons();
 
-    btn.addEventListener('click',()=>{
-      html.classList.toggle('dark');
-      localStorage.theme=html.classList.contains('dark')?'dark':'light';
-      setIcons();
+    btn.addEventListener('click', () => {
+      const nowDark = !html.classList.contains('dark');
+      if (nowDark) {
+        html.classList.add('dark');
+        localStorage.setItem('theme','dark');
+      } else {
+        html.classList.remove('dark');
+        localStorage.setItem('theme','light');
+      }
+      updateIcons();
     });
-    
+
     /* Back to top button */
     const backToTopBtn = document.getElementById('back-to-top');
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    backToTopBtn?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    window.addEventListener('scroll',()=>{
+      if(!backToTopBtn) return;
+      if(window.scrollY>500){backToTopBtn.classList.add('visible');}
+      else{backToTopBtn.classList.remove('visible');}
+
+      // Animate skill bars
+      document.querySelectorAll('.flex.justify-between').forEach(el=>{
+        const r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight-100){el.classList.add('skill-bar','animate');}
       });
     });
-    
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 500) {
-        backToTopBtn.classList.add('visible');
-      } else {
-        backToTopBtn.classList.remove('visible');
-      }
-      
-      // Animate skill bars when in viewport
-      document.querySelectorAll('.flex.justify-between').forEach(skillBar => {
-        const rect = skillBar.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          skillBar.classList.add('skill-bar', 'animate');
-        }
-      });
-    });
-    
-    /* Image loading optimization */
-    document.addEventListener('DOMContentLoaded', () => {
-      const images = document.querySelectorAll('img');
-      images.forEach(img => {
-        if (!img.hasAttribute('loading')) {
-          img.setAttribute('loading', 'lazy');
-        }
-        if (!img.hasAttribute('decoding')) {
-          img.setAttribute('decoding', 'async');
-        }
+
+    /* Lazy-load images (fallback) */
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll('img').forEach(img=>{
+        if(!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+        if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
       });
     });
   </script>
 
-  <!-- Back to top button -->
-  <button id="back-to-top" aria-label="Back to top" class="back-to-top bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 transition">
+  <!-- Back to top -->
+  <button id="back-to-top" aria-label="Back to top"
+          class="back-to-top bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 transition">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
     </svg>
