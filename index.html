@@ -5,42 +5,83 @@
   <meta name="description" content="Martin Vad Møller – Multidisciplinary bioinformatician with hands-on experience in sequencing, data processing, simulation, infrastructure, and workflow automation.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Martin Vad Møller | Bioinformatician & Software Developer</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://martinvad.github.io/">
+  <meta property="og:title" content="Martin Vad Møller | Bioinformatician & Software Developer">
+  <meta property="og:description" content="Multidisciplinary bioinformatician transforming clinical sequencing data into actionable insights while automating infrastructure and workflows across public healthcare and private consulting.">
+  <meta property="og:image" content="https://martinvad.github.io/profile.jpg">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:image:alt" content="Martin Vad Møller - Bioinformatician">
 
-  <!-- Fonts & Tailwind -->
+  <!-- Additional SEO -->
+  <meta name="author" content="Martin Vad Møller">
+  <meta name="keywords" content="bioinformatics, bioinformatician, software developer, genomics, nextflow, python, R, docker, clinical sequencing, data analysis, workflow automation">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://martinvad.github.io/">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Martin Vad Møller",
+    "jobTitle": "Bioinformatician & Software Developer",
+    "description": "Multidisciplinary bioinformatician with hands-on experience in sequencing, data processing, simulation, infrastructure, and workflow automation",
+    "url": "https://martinvad.github.io/",
+    "image": "https://martinvad.github.io/profile.jpg",
+    "email": "martinvadmoller@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Esbjerg",
+      "addressCountry": "Denmark"
+    },
+    "alumniOf": [
+      {
+        "@type": "Organization",
+        "name": "University of Southern Denmark",
+        "sameAs": "https://www.sdu.dk/"
+      }
+    ],
+    "sameAs": [
+      "https://linkedin.com/in/mvmoeller/",
+      "https://github.com/MartinVad",
+      "https://gitlab.com/martinvad"
+    ]
+  }
+  </script>PE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Martin Vad Møller – Multidisciplinary bioinformatician with hands-on experience in sequencing, data processing, simulation, infrastructure, and workflow automation.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Martin Vad Møller | Bioinformatician & Software Developer</title>
+
+  <!-- Performance optimizations -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- Tailwind configuration: explicitly use class-based dark mode -->
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  
+  <!-- Tailwind CSS -->
   <script>
     tailwind.config = {
       darkMode: 'class'
     };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Apply saved or system dark mode preference on page load -->
+  
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Theme initialization script (must run before page renders) -->
   <script>
     if (localStorage.theme === 'dark' ||
         (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     }
   </script>
-  <!-- Invert colour scheme when dark class is present.
-       This simple trick flips the entire page colours, giving a dark theme without relying on Tailwind's dark: classes.
-       Images are double-inverted to preserve their original colours. -->
-  <style>
-    html.dark {
-      filter: invert(1) hue-rotate(180deg);
-      background-color: #0f172a;
-    }
-    html.dark img {
-      filter: invert(1) hue-rotate(180deg);
-    }
-  </style>
-  <style>
-    body{font-family:'Inter',sans-serif;}
-    .mobile-menu{display:none;}
-    .mobile-menu.active{display:block;}
-  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
 
@@ -104,7 +145,8 @@
   <section id="top" class="max-w-5xl mx-auto px-4 py-20 text-center">
     <div class="flex justify-center mb-6">
       <img src="profile.jpg" alt="Martin Møller portrait"
-           class="w-40 h-40 rounded-full object-cover shadow-lg dark:shadow-gray-800/60" loading="lazy">
+           class="w-40 h-40 rounded-full object-cover shadow-lg dark:shadow-gray-800/60 img-optimized" 
+           width="160" height="160" loading="eager">
     </div>
     <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Martin Vad Møller</h2>
     <p class="text-lg sm:text-xl mb-2">🧬 Bioinformatician | Software Developer | IT Consultant</p>
@@ -356,8 +398,8 @@
         <div class="bg-gray-50 p-6 rounded-xl shadow-lg dark:bg-gray-900 dark:shadow-gray-700">
           <h3 class="text-2xl font-bold mb-6">📢 Conferences & Posters</h3>
           <div class="space-y-4">
+            <div><h4 class="font-semibold text-blue-600">ESCMID 2025</h4><p class="text-sm text-gray-600 dark:text-gray-400"></p></div>
             <div><h4 class="font-semibold text-blue-600">ECCMID 2024</h4><p class="text-sm text-gray-600 dark:text-gray-400">Poster – Comparative gDNA extraction for 3rd-gen sequencing.</p></div>
-            <div><h4 class="font-semibold text-blue-600">ESCMID 2025</h4><p class="text-sm text-gray-600 dark:text-gray-400">Accepted abstract (oral session).</p></div>
             <div><h4 class="font-semibold text-blue-600">ABPHM 2023</h4><p class="text-sm text-gray-600 dark:text-gray-400">Applied Bioinformatics & Public Health Microbiology.</p></div>
           </div>
         </div>
@@ -410,23 +452,22 @@
       </div>
 
       <!-- Photo gallery thumbnails -->
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition dark:bg-gray-800 dark:shadow-gray-700">
-          <img src="images/football.jpg" alt="Playing football" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600 dark:text-gray-400">Weekend football</p>
+      <div class="gallery-grid">
+        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition hover-lift dark:bg-gray-800 dark:shadow-gray-700">
+          <img data-src="images/disc_golf.jpg" alt="Disc golf" 
+               class="rounded-lg object-cover w-full h-48 mb-3 img-optimized image-loading" 
+               width="250" height="192" loading="lazy">
+          <p class="text-center text-gray-600 dark:text-gray-400">Disc golf</p>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition dark:bg-gray-800 dark:shadow-gray-700">
-          <img src="images/disc_golf.jpg" alt="Disc golf" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600 dark:text-gray-400">Disc golf sessions</p>
+        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition hover-lift dark:bg-gray-800 dark:shadow-gray-700">
+          <img data-src="images/pizza.jpg" alt="Making pizza" 
+               class="rounded-lg object-cover w-full h-48 mb-3 img-optimized image-loading" 
+               width="250" height="192" loading="lazy">
+          <p class="text-center text-gray-600 dark:text-gray-400">Pizza</p>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition dark:bg-gray-800 dark:shadow-gray-700">
-          <img src="images/pizza.jpg" alt="Making pizza" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600 dark:text-gray-400">Neapolitan pizza experiments</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition dark:bg-gray-800 dark:shadow-gray-700">
-          <img src="images/coffee.jpg" alt="Coffee time" class="rounded-lg object-cover w-full h-48 mb-3">
-          <p class="text-center text-gray-600 dark:text-gray-400">Third-wave coffee</p>
-        </div>
+        <!-- Add more images here when available:
+             - images/football.jpg for football activities
+             - images/coffee.jpg for home barista setup -->
       </div>
     </div>
   </section>
@@ -473,34 +514,6 @@
   </footer>
 
   <!-- ░░░ JS ░░░ -->
-  <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-button')
-      .addEventListener('click', () =>
-        document.getElementById('mobile-menu').classList.toggle('active'));
-
-    document.querySelectorAll('#mobile-menu a')
-      .forEach(link => link.addEventListener('click', () =>
-        document.getElementById('mobile-menu').classList.remove('active')));
-
-    // Theme switching logic
-    const btn = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    const iconLight = document.getElementById('theme-toggle-light');
-    const iconDark  = document.getElementById('theme-toggle-dark');
-
-    function updateIcons() {
-      const darkMode = html.classList.contains('dark');
-      iconDark.style.display  = darkMode ? 'none' : 'block';
-      iconLight.style.display = darkMode ? 'block' : 'none';
-    }
-    updateIcons();
-
-    btn.addEventListener('click', () => {
-      html.classList.toggle('dark');
-      localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-      updateIcons();
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
