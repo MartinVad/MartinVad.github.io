@@ -10,16 +10,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- 2) Tailwind CDN configured for class-based dark mode -->
+  <!-- Tailwind configuration: explicitly use class-based dark mode -->
   <script>
-    tailwind.config = { darkMode: 'class' };
+    tailwind.config = {
+      darkMode: 'class'
+    };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- AOS (animations) -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-
+  <!-- Apply saved or system dark mode preference on page load -->
+  <script>
+    if (localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <!-- Invert colour scheme when dark class is present.
+       This simple trick flips the entire page colours, giving a dark theme without relying on Tailwind's dark: classes.
+       Images are double-inverted to preserve their original colours. -->
+  <style>
+    html.dark {
+      filter: invert(1) hue-rotate(180deg);
+      background-color: #0f172a;
+    }
+    html.dark img {
+      filter: invert(1) hue-rotate(180deg);
+    }
+  </style>
   <style>
     body{font-family:'Inter',sans-serif;}
     .mobile-menu{display:none;}
